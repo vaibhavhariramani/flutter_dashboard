@@ -1,5 +1,5 @@
 <p align="center">        
-<img  src="images\Dashboard.png" height="170">
+<img  src="https://github.com/vaibhavhariramani/flutter_dashboard/blob/main/images/Dashboard.png?raw=true" height="170">
 </p>        
 
 <p align="center">        
