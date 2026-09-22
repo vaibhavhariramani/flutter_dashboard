@@ -22,6 +22,7 @@ class DashboardPages {
   }
 
   static void setRootPages(List<GetPage> _pages) {
+    _rootPages.clear();
     _rootPages.addAll(_pages);
   }
 
@@ -52,6 +53,7 @@ class DashboardPages {
       for (var item in footerItems) ..._pages(item),
     ];
 
+    _routes.clear();
     _routes.addAll(
       [
         GetPage(
@@ -72,19 +74,6 @@ class DashboardPages {
           ),
           unknownRoute: unknownPage,
           children: [
-            // GetPage(
-            //   preventDuplicates: true,
-            //   name: _Paths.LOGIN,
-            //   page: () => LoginView(),
-            //   binding: BindingsBuilder(
-            //     () {
-            //       Get.lazyPut<LoginController>(() => LoginController());
-            //     },
-            //   ),
-            //   middlewares: [
-            //     FlutterDashboardEnsureNotAuthenticated(),
-            //   ],
-            // ),
             ..._rootPages,
             GetPage(
               preventDuplicates: true,

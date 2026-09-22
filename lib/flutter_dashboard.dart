@@ -17,3 +17,4 @@ export './src/controllers/controllers.dart';
 export './src/navigation/flutter_dashboard_navigation.dart';
 export './src/services/services.dart';
 export './src/flutter_dashboard_material_app.dart';
+export './src/auth/auth.dart';

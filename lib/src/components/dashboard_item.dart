@@ -11,6 +11,11 @@ class FlutterDashboardItem {
   final List<Widget> actions;
   final bool overrideActions;
 
+  /// An optional widget shown at the end of this item's drawer entry, e.g. a
+  /// notification-count badge or a "new" chip. Ignored on items created via
+  /// [FlutterDashboardItem.items] (parent entries use their expand arrow).
+  final Widget? trailing;
+
   FlutterDashboardItem({
     required this.title,
     required this.icon,
@@ -20,6 +25,7 @@ class FlutterDashboardItem {
     this.search,
     this.overrideActions = false,
     this.actions = const [],
+    this.trailing,
   }) : subItems = [];
 
   FlutterDashboardItem.items({
@@ -31,5 +37,6 @@ class FlutterDashboardItem {
         search = null,
         overrideActions = false,
         actions = const [],
+        trailing = null,
         page = null;
 }

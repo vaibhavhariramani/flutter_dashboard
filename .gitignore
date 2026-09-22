@@ -26,5 +26,24 @@ migrate_working_dir/
 /pubspec.lock
 **/doc/api/
 .dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
 .packages
 build/
+
+# Secrets and machine-local files - never commit these.
+.env
+.env.*
+*.jks
+*.keystore
+*.p12
+*.pem
+android/local.properties
+android/key.properties
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Runner/GeneratedPluginRegistrant.*
+**/macos/Flutter/ephemeral/
+**/macos/Flutter/GeneratedPluginRegistrant.swift
+**/linux/flutter/ephemeral/
+**/windows/flutter/ephemeral/

@@ -56,6 +56,7 @@ class AppBarOptions {
       searchHint: other?.searchHint ?? searchHint,
       searchDecoration: other?.searchDecoration ?? searchDecoration,
       shape: other?.shape ?? shape,
+      showTitle: other?.showTitle ?? showTitle,
     );
   }
 
@@ -123,17 +124,16 @@ class _DashboardAppBar extends GetResponsiveView<FlutterDashboardController> {
     var actions = [
       ...selected.actions,
       if (!selected.overrideActions) ..._dashboard.overrideActions,
-      // if (_dashboard.authConfig.rootUser != null)
-      // IconButton(
-      //   onPressed: () async {
-      //     controller.isScreenLoading(true);
-      //     await FlutterDashboardAuthService.to.logout();
-      //     controller.isScreenLoading(false);
-      //   },
-      //   icon: const Icon(
-      //     Icons.logout_rounded,
-      //   ),
-      // ),
+      if (_dashboard.authConfig != null &&
+          _dashboard.authConfig!.showLogoutButton)
+        IconButton(
+          onPressed: () async {
+            controller.isScreenLoading(true);
+            await FlutterDashboardAuthController.to.logout();
+            controller.isScreenLoading(false);
+          },
+          icon: Icon(_dashboard.authConfig!.logoutIcon),
+        ),
     ];
 
     bool isFloating = screen.isDesktop
@@ -147,7 +147,6 @@ class _DashboardAppBar extends GetResponsiveView<FlutterDashboardController> {
           constraints: const BoxConstraints(maxWidth: 500),
           child: selected.search == null
               ? (selected.appBarOptions?.showTitle ??
-                      selected.appBarOptions?.showTitle! ??
                       _dashboard.appBarOptions.showTitle ??
                       true)
                   ? Text(

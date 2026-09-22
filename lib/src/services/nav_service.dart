@@ -42,6 +42,10 @@ class FlutterDashboardNavService extends GetxService {
 
   @override
   void onInit() {
+    // `ever` only fires on subsequent changes to `enabledRoutes`, not for
+    // its initial (empty) value, so the "show everything" default has to be
+    // populated explicitly here or the drawer would never show any items.
+    _allRoutes.addAll(navItems);
     _getAllEnabledRoutes();
     super.onInit();
   }

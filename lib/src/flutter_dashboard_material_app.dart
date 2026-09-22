@@ -20,6 +20,14 @@ class FlutterDashboardMaterialApp<T> extends StatefulWidget {
     GetNavConfig? currentRoute,
   )? overrideRootPage;
 
+  /// Enables the dashboard's built-in login flow when provided.
+  ///
+  /// When null (the default), no login route or authentication gate is
+  /// added, preserving the original behavior of the dashboard. See
+  /// [FlutterDashboarAuthConfig] for the available hooks, including
+  /// `overrideLoginView` for a fully custom login screen.
+  final FlutterDashboarAuthConfig? authConfig;
+
   FlutterDashboardMaterialApp({
     Key? key,
     required this.title,
@@ -34,6 +42,7 @@ class FlutterDashboardMaterialApp<T> extends StatefulWidget {
     this.drawerOptions = const DrawerOptions(),
     this.dashboardMiddlewares,
     this.overrideRootPage,
+    this.authConfig,
     this.notFoundPage = const Scaffold(
       body: Center(
         child: Text(
@@ -92,7 +101,24 @@ class _FlutterDashboardMaterialAppState<T>
       textDirection: widget.config.textDirection,
       translations: widget.config.translations,
       translationsKeys: widget.config.translations?.keys ?? Get.translations,
-      builder: widget.builder,
+      builder: (context, child) {
+        Widget content = child ?? const SizedBox.shrink();
+        if (widget.builder != null) {
+          content = widget.builder!(context, content);
+        }
+        if (widget.authConfig == null) {
+          return content;
+        }
+        return Obx(
+          () => FlutterDashboardAuthController.to.isAuthenticated.value
+              ? content
+              : Navigator(
+                  onGenerateRoute: (settings) => MaterialPageRoute(
+                    builder: (_) => const LoginView(),
+                  ),
+                ),
+        );
+      },
       navigatorObservers: widget.navigatorObservers,
       unknownRoute: DashboardPages.unknownPage,
       initialBinding: BindingsBuilder(
@@ -103,6 +129,12 @@ class _FlutterDashboardMaterialAppState<T>
                 navFooterItems: widget.drawerOptions.footerNavItems,
               ),
               permanent: true);
+          if (widget.authConfig != null) {
+            Get.put(
+              FlutterDashboardAuthController(widget.authConfig!),
+              permanent: true,
+            );
+          }
           if ((widget.rootControllers ?? []).isNotEmpty) {
             for (var _controller in (widget.rootControllers ?? [])) {
               _controller;

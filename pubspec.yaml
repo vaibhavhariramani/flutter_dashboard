@@ -1,7 +1,12 @@
 name: flutter_dashboard
-description: flutter_dashboard – a Flutter package for widgets and UI components.
-version: 2.0.1
+description: >-
+  Build a responsive admin dashboard fast: collapsible drawer nav, adaptive
+  app bar with search, theming, and an optional built-in login flow.
+  Backed by GetX routing and state.
+version: 2.2.0
 homepage: https://github.com/vaibhavhariramani/flutter_dashboard
+repository: https://github.com/vaibhavhariramani/flutter_dashboard
+issue_tracker: https://github.com/vaibhavhariramani/flutter_dashboard/issues
 
 environment:
   sdk: '>=3.0.6 <4.0.0'
@@ -15,7 +20,7 @@ dependencies:
   reactive_forms: ^16.0.1
   equatable: ^2.0.3
   get_storage: ^2.0.3
-  get: ^4.6.1
+  get: ^4.6.6
   flutter:
     sdk: flutter
 

@@ -464,6 +464,7 @@ class _FooterNavList extends GetResponsiveView<FlutterDashboardController> {
                         item.title,
                         textScaleFactor: Get.textScaleFactor,
                       ),
+                      trailing: item.trailing,
                     ),
                   ),
                 ),
@@ -740,6 +741,7 @@ class _DrawerList extends GetResponsiveView<FlutterDashboardController> {
                   item.title,
                   textScaleFactor: Get.textScaleFactor,
                 ),
+                trailing: item.trailing,
               ),
       ),
     );
